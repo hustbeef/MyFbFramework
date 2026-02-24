@@ -1398,6 +1398,11 @@ Namespace My.Sys.Forms
 				Case 0
 					If OnDeActivateApp Then OnDeActivateApp(*Designer, This)
 				End Select
+			Case WM_MOUSEACTIVATE
+				If GetActiveWindow() <> FHandle Then
+					msg.Result = MA_ACTIVATEANDEAT
+					Return
+				End If
 			Case WM_DESTROY
 				If Accelerator Then DestroyAcceleratorTable(Accelerator)
 			Case WM_DRAWITEM
